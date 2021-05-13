@@ -48,4 +48,6 @@ const TwoarrFunc = (arrayO, arrayT) => arrayO.filter((value) => {
 
 // (e) => arrayY.indexOf(e) > -1
 
+//const TwoarrFunc = (arrayO, arrayT) => arrayO.filter((value) => arrayT.indexOf(value) != -1)
+
 console.log(TwoarrFunc(arrayOnee, arrayTwoo))
