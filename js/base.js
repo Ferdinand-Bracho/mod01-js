@@ -105,24 +105,30 @@ btnMostrar.addEventListener('click', (event) => {
 btnReset = document.querySelector('.btn-reset')
 
 btnReset.addEventListener('click', (event) => {
-        // listKoders = [...listKoders, ...enrolledKoders]
         listKoders = listKoders.concat(enrolledKoders)
         enrolledKoders = []
         updateTable()
 })
  
+
+
+
+
+let modalTest = document.querySelector('#exampleModalCenter')
+
+
+// ! Practica en casa session 12 
+
 introKoders = document.getElementById('introKodersForm')
 
 introKoders.addEventListener('submit', (event) => {
     event.preventDefault()
+
     if (document.querySelector('.idK').value === '' || 
         document.querySelector('.nameK').value === '') {
-            alert('Ingresa los valores correspondientes en los campos para el alta')
+            modalTest.modal('show')
+            // alert('Ingresa los valores correspondientes en los campos para el alta')     
         }
-
-    // else if (typeof document.querySelector('.idK').value != "number"){
-    //     alert('El Id del Koder debe ser un vaor numerico')
-    // }
 
     else {
         let newKoder = {
@@ -135,3 +141,7 @@ introKoders.addEventListener('submit', (event) => {
         document.querySelector('.nameK').value = ''
     }
 })
+
+
+
+modalTest.modal('show')
