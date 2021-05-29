@@ -30,7 +30,7 @@ $(document).ready(function() {
     printSingleKoder()
     
     // ? //////////////////////////////////////////////////////////////////////////////
-    
+
     // !Edit Koder properties 
     $('#btn-form-edit').click(() => {
         let dataToPut = {
@@ -40,24 +40,22 @@ $(document).ready(function() {
             position: $('#inputPositionEdit').val()
         }
 
-            // !Ajax Put para actualizar datos
-            $.ajax({
-                url: `https://sessiones-js-default-rtdb.firebaseio.com/koders/${hashKoder}/.json`,
-                data: JSON.stringify(dataToPut),
-                type: 'PUT',
-                datatype: 'json',
-                success: function(){
-                    console.log('jansjkdnajksd')
-                    printSingleKoder()
-                },
-                error: function(xhr){
-                    console.log(xhr.statusText)
-                },
-                complete: function(){
-                    console.log('Peticion Realizada')
-                }
+    // !Asyn function para actualizar datos de koder 
+    const updateKoder = async () => {
+        try {
+            fetch(`https://sessiones-js-default-rtdb.firebaseio.com/koders/${hashKoder}/.json`, {
+                method: 'PUT',
+                body: JSON.stringify(dataToPut)
+            }).then((response) => {
+                printSingleKoder()
+                console.log(response)
             })
-    })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    updateKoder()
+})
     
     // ? //////////////////////////////////////////////////////////////////////////////
 

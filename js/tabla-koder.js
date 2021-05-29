@@ -20,11 +20,16 @@ $(document).ready(() => {
         $('.t-koder tbody').html(postTableKoders)
     }
     
-    // !Funcion para get y ejecucion de funcion printTable con la data como argumento
-    const printTableFinal = () => {
-        $.get('https://sessiones-js-default-rtdb.firebaseio.com/koders/.json', (data) => {
-            printTable(data)
-        })
+    // !Async function con try catch para jalar data y ejecutar printable() con la data como argumento 
+    const printTableFinal = async () => {
+        try {
+            await $.get('https://sessiones-js-default-rtdb.firebaseio.com/koders/.json', (data) => {
+                printTable(data)
+            })
+        } catch (error) {
+            console.log('Error al intentar mostrar la tabla')
+            console.log(error)
+        }
     }
     
     printTableFinal()
@@ -66,12 +71,20 @@ $(document).ready(() => {
             position: inputPosition
         }
     
-        // !Post a la db del nuevo koder
-          $.post('https://sessiones-js-default-rtdb.firebaseio.com/koders/.json', JSON.stringify(newKoder), (response) => {
-              cleanInput()
-              printTableFinal()
-              console.log(response)
-          })
+        // !Async function to post nuevo koder a la db
+        const postNewKoder = async () => {
+            try {                
+                await $.post('https://sessiones-js-default-rtdb.firebaseio.com/koders/.json', JSON.stringify(newKoder), (response) => {
+                    cleanInput()
+                    printTableFinal()
+                    console.log(response)
+                })
+            }catch(error){
+                console.log('Error al intentar cargar nuevo Koder')
+                console.log(error)
+            }
+        }
+        postNewKoder()
     })
     
     // ? //////////////////////////////////////////////////////////////////////////////////////
@@ -79,26 +92,24 @@ $(document).ready(() => {
 
     $('.t-koder').on('click', '.btn-delete-koder', function() {
         let koderId = $(this).data('id')
-        console.log(koderId)
 
-        // !$Ajax delete koder seleccionado
-        $.ajax({
-            url: `https://sessiones-js-default-rtdb.firebaseio.com/koders/${koderId}/.json`,
-            type: 'DELETE',
-            datatype: 'json',
-            success: function(){
-                printTableFinal()
-                console.log('Operacion para eliminar koder exitosa')
-            },
-            error: function(xhr){
-                console.log(xhr.statusText)
-            },
-            complete: function(){
-                console.log('Peticion Realizada')
-            }
-        })
+        // !Async function para eliminar Koder seleccionado
+        const deleteKoder = async () => {
+            try{
+                await fetch(`https://sessiones-js-default-rtdb.firebaseio.com/koders/${koderId}/.json`, { 
+                    method: 'DELETE'
+                    }).then(() => {
+                    console.log(`Koder ${koderId} eliminado con exito`)
+                    printTableFinal()
+                    })
+            }catch(error){
+                console.log('Error al intentar eliminar Koder seleccionado')
+                console.log(error)
+            }       
+        }
+        deleteKoder()
     })
-     
+    
     // ? //////////////////////////////////////////////////////////////////////////////////////
 
 })
