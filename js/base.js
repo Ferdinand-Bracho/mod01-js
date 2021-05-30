@@ -1,62 +1,52 @@
-
 /**
- * Pedir al usuario usuario un numero entre 1 y 10
- * Imprimir la tabla de multiplicar de ese número
- * p.ej. 
- * 3 x 1 = 3
- * 3 x 2 = 6
- */
-
-const numToMulti = parseInt(window.prompt('Igresa un numero enre 1 y 10 para vre su table: '))
-
-for (let i = 1; i < 10; i++)    {
-    console.log(`${numToMulti} X ${i} = ${numToMulti * i}`)
-}
-
-
-/**
- * Pedir al usuario una oracion
- * Imprimir un string con todas las vocales
- * Imprimir un string con todas las consonantes
+ * For
+ * Escribir un programa de arroje la suma de los multiplos de 3, 5 o 7 que hay entre 1 y 100
  * 
- */
-
-// const sentenceToCheck = window.prompt('Ingresa una oracion para revisar: ').toLowerCase()
-// const vowels = 'aeiou'
-// const specialChar ='! @,.'
-// let vowelsInSentence = ""
-// let consonantsInSentence = ""
-// let totalChar = sentenceToCheck.length
-
-// for (let i = 0; i < sentencerToCheck.length; i++)   {
-
-//     if (vowels.includes(sentencerToCheck[i])) {
-//         vowelsInSentence += sentencerToCheck[i]
-//         continue
-//     }
-
-//     else if (sentencerToCheck[i] === " ")   {
-//         continue
-//     }
-
-//     else    {
-//         consonantsInSentence += sentencerToCheck[i]
+//  */
+// let sum = 0
+// for (let i = 1; i <= 100; i++)  {
+//     if (i % 3 === 0 || i % 5 === 0 || i % 7 === 0)    {
+//         sum += i
 //     }
 // }
 
-// console.log(vowelsInSentence)
-// console.log(consonantsInSentence)
+// console.log(sum)
 
+// //////////////////////////////////////////////////////////////////
+//  /**
+//   * While
+//   * Escribir un programa que le pida al usuario un numero
+//   * que imprima en consola el numero dado si es positivo
+//   * si el numero es negativo, salir del ciclo
+//   * 
+//   */
 
-/**
- * Pedir el usuario un numero entre 10 y 100
- * Imprimir todos los numeros pares que existen entre 1 y ese numero
+//  let numToPrint = parseInt(window.prompt('Ingresa un numero: '))
+
+//  while (numToPrint > 0) {
+//      console.log(numToPrint)
+//      numToPrint = parseInt(window.prompt('Ingresa un numero: '))
+//  }
+
+//////////////////////////////////////////////////////////////////
+ /**
+ * Dado los siguientes 2 strings
+ * 'smtp'
+ * 'aeiou'
+ * Imprimir en consola las siguientes combinaciones
+ * -> sa, se, si, so , su 
+ * -> ma, me, mi, mo , mu 
+ * -> ta, te, ti, to , tu 
+ * -> pa, pe, pi, po , pu
  */
 
-// const number = parseInt(window.prompt('Ingresa un numero entre 10 y 100: '))
+const str1 = 'smtp'
+const str2 = 'aeiou'
 
-// for (let i = 1; i < number; i++)    {
-//     if (i % 2 === 0)    {
-//         console.log(i)
-//     }
-// }
+for (let i = 0; i <= str1.length; i++)    {
+    let result = ''
+    for (let j = 0;j <= str2.length; j++) {
+        result += str1.substr(i, 1) + str2.substr(j, 1) + ';'
+    }
+    console.log(result)
+}
