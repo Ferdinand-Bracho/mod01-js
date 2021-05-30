@@ -1,33 +1,6 @@
-/**
- * Convertidor de temperatura
- * Generar una función, que reciba (grados, entrada, salída ) 
- * Default es ºC a ºF
- * p.ej. (100,c,f) -> 100 ºC a ºF -> Default
- * p.ej. (100,f,c) -> 100 ºF a ºC
- * C to F -> (celsius*9)/5 + 32
- * F to C -> ((fahrenheit - 32)*5)/9
- *
- */
+//! Simulando ATM - Arrow Functions
 
-//error handlin
-// function tempConverter(temp, initial = 'c', finish = 'f')    {
-//     return initial == 'c' ? 
-//         `${(temp * 9) /5 +32}` : 
-//         `${(((temp - 32)*5) /9).toFixed(2)}`
-
-    // if (initial === 'c')    {
-    //     return `${(temp * 9) /5 +32}`
-    // }
-    // else {
-    //     return `${(((temp - 32)*5) /9).toFixed(2)}`
-    // }
-//}
-
-// console.log(tempConverter(100 , 'f'))
-
-///////////////////////////////////////////////////////////////
-//Simulando ATM 
-
+//! Incializando variables
 let saldo = 2000
 let consultas = 0
 let depositos = 0
@@ -35,26 +8,22 @@ let retiros = 0
 let cantidad = 0
 let cuenta = 0
 
-const  retiro = function(cantidad)   {
-    return saldo -= cantidad
-}
+//! Incializando funcciones
+const retiro = (cantidad) => saldo -= cantidad
 
-const deposito = function(cantidad)    {
-    return saldo += cantidad
-}
+const deposito = (cantidad) => saldo += cantidad
 
-const consulta = function()    {
-    return `Tu saldo es $${saldo} - Numero de consulta es: ${consultas} - Numero de depositos es ${depositos}  - Numero de retiros ${retiros}`
-}
+const consulta = () => `Tu saldo es $${saldo}\n\nDatos de la session\nConsultas: ${consultas}\nDepositos: ${depositos}\nRetiros: ${retiros}`
 
-const traspaso = function(cuenta, cantidad)    {
-    saldo -= cantidad
-    return `Envio exitoso a cuenta ${cuenta} la cantidad de $${cantidad}`
-}
+const traspaso = (cuenta, cantidad) => (
+    saldo -= cantidad, 
+    `Traspaso exitoso a cuenta ${cuenta} la cantidad de $${cantidad}`
+)
 
+//! Pidiendo seleccionar una opcion al usuario
 let accion = window.prompt('Selecciona una accion:\n1-Retiro\n2-Deposito\n3-Consulta\n4-Traspaso\n5-Salir')
 
-const numAcciones = '1234'
+//! Abriedno el while loop con el swith dentro para accionar en base a al seleccion del usuario y preguntar nuevamente
 while (accion != '5')   {
     switch (accion) {
 
@@ -66,14 +35,14 @@ while (accion != '5')   {
                 retiros++
             }
             else {
-                console.log("Lo sentidmos!. No cuentas con fondos para realizar ese retiro")
+                console.error("Lo sentidmos!. No cuentas con fondos para realizar ese retiro")
             }
             break
 
         case '2':
             cantidad = parseInt(window.prompt('Ingresa una cantidad a depositar: $'))
             deposito(cantidad)
-            console.log(`Deposito exitosi, tu saldo actual es de $${saldo}`)
+            console.log(`Deposito exitoso, tu saldo actual es de $${saldo}`)
             depositos++
             break
 
@@ -90,7 +59,7 @@ while (accion != '5')   {
                 console.log(`Tu saldo actual es $${saldo}`)
             }
             else    {
-                console.log('Lo sentidmos!. No cuentas con fondos para realizar ese traspaso')
+                console.error('Lo sentidmos!. No cuentas con fondos para realizar ese traspaso')
             }
             break
 
